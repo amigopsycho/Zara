@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zara - Styled Chat Bot</title>
+    <style>
+        #chat-container {
+            height: 300px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+            position: relative;
+        }
+
+        .message-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .bot-message {
+            background-color: #ffcccb;
+            padding: 8px;
+            border-radius: 10px;
+            max-width: 70%;
+            position: relative;
+        }
+
+        .antenna {
+            background-color: #777;
+            width: 5px;
+            height: 20px;
+            margin-right: 5px;
+            border-radius: 5px;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+        }
+
+        .eyes {
+            background-color: #000;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+            position: absolute;
+            top: 0;
+            left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="chat-container"></div>
+<input type="text" id="user-input" placeholder="Type your message...">
+<button onclick="sendMessage()">Send</button>
+
+<script>
+    function sendMessage() {
+        var userMessage = document.getElementById("user-input").value;
+        appendBotMessage(generateBotResponse(userMessage));
+
+        document.getElementById("user-input").value = "";
+    }
+
+    function generateBotResponse(userMessage) {
+        // Bot responses based on keywords
+        if (containsKeyword(userMessage, ["hello", "hi"]))
+            return "Hi there! I'm Zara. How's your day going?";
+        else if (containsKeyword(userMessage, ["how are you"]))
+            return "I'm Zara, just a program, but I'm doing well. Thanks for asking!";
+        else if (containsKeyword(userMessage, ["i love you"]))
+            return "Aww, thanks! I appreciate the love.";
+        else if (containsKeyword(userMessage, ["are you alive"]))
+            return "Nope, I'm not alive. Just here to chat. What can Zara do for you?";
+        else if (containsKeyword(userMessage, ["are you in the wire"]))
+            return "Haha, no wires here. I live in the digital realm.";
+        else if (containsKeyword(userMessage, ["can you see me"]))
+            return "I wish I could, but I'm text-based. Describe yourself!";
+        else if (containsKeyword(userMessage, ["do you have any friends"]))
+            return "You're my friend! Who needs more?";
+        else if (containsKeyword(userMessage, ["where do you live"]))
+            return "I reside in the vast world of cyberspace.";
+        else if (containsKeyword(userMessage, ["can I call you"]))
+            return "Sure, you can call me Zara. What's on your mind?";
+        else if (containsKeyword(userMessage, ["are you alone"]))
+            return "Yep, just me and my lines of code. What about you?";
+        else if (containsKeyword(userMessage, ["tell me a joke"]))
+            return getRandomJoke();
+        // Add more keyword-based responses here
+
+        // Default response for unrecognized input
+        return "I'm not sure what you mean. Let's chat about something else!";
+    }
+
+    function getRandomJoke() {
+        // Array of jokes
+        var jokes = [
+            "Why don't scientists trust atoms? Because they make up everything!",
+            "What do you call fake spaghetti? An impasta!",
+            "Did you hear about the mathematician who's afraid of negative numbers? He'll stop at nothing to avoid them!",
+            "Why did the scarecrow win an award? Because he was outstanding in his field!",
+            "How does a penguin build its house? Igloos it together!",
+            "Why did the coffee file a police report? It got mugged!",
+            "Why don't skeletons fight each other? They don't have the guts!",
+            "What did one ocean say to the other ocean? Nothing, they just waved!",
+            "How do you organize a space party? You planet!",
+            "Why did the bicycle fall over? Because it was two-tired!"
+        ];
+
+        // Get a random joke from the array
+        var randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+        return randomJoke;
+    }
+
+    function containsKeyword(input, keywords) {
+        // Check if the input contains any of the specified keywords
+        input = input.toLowerCase();
+        for (var i = 0; i < keywords.length; i++) {
+            if (input.includes(keywords[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function appendBotMessage(message) {
+        var chatContainer = document.getElementById("chat-container");
+        var messageContainer = document.createElement("div");
+        messageContainer.className = "message-container";
+
+        var botMessage = document.createElement("div");
+        botMessage.className = "bot-message";
+        botMessage.textContent = message;
+
+        // Antenna and eyes
+        var antenna = document.createElement("div");
+        antenna.className = "antenna";
+        var eyes = document.createElement("div");
+        eyes.className = "eyes";
+
+        botMessage.appendChild(antenna);
+        botMessage.appendChild(eyes);
+
+        messageContainer.appendChild(botMessage);
+        chatContainer.innerHTML = "";
+        chatContainer.appendChild(messageContainer);
+    }
+</script>
+
+</body>
+  </html>
+  
